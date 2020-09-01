@@ -5,7 +5,7 @@ const JWT = require('../utils/JWT');
 
 const tableName = 'users-table';
 
-const authenticate = ({ body }) => {
+const authenticate = async ({ body }) => {
   const { username, password } = JSON.parse(body);
 
   const user = await Dynamo.get({ username }, tableName).catch((err) => {
