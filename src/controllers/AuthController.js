@@ -18,7 +18,7 @@ const authenticate = async ({ body }) => {
     return API_Responses._404({ message: 'User not found' });
   }
 
-  const passwordIsValid = Encrypter.compare(password, user.password);
+  const passwordIsValid = await Encrypter.compare(password, user.password);
 
   if (!passwordIsValid) {
     return API_Responses._401({ message: 'Unauthorized' });
