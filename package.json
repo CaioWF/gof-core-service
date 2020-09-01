@@ -3,6 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:CaioWF/gof-core-service.git",
-  "author": "Publio Blenilio <publio.blenilio@gmail.com>",
-  "license": "MIT"
+  "author": "Caio Weliton <contato.caioweliton@gmail.com>; Publio Blenilio <publio.blenilio@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "deploy": "sls deploy",
+    "remove": "sls remove"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.743.0",
+    "serverless": "^1.80.0",
+    "serverless-webpack": "^5.3.4",
+    "webpack": "^4.44.1"
+  }
 }
