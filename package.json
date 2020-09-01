@@ -14,5 +14,9 @@
     "serverless": "^1.80.0",
     "serverless-webpack": "^5.3.4",
     "webpack": "^4.44.1"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "jsonwebtoken": "^8.5.1"
   }
 }
