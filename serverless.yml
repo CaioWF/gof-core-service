@@ -3,9 +3,82 @@ service: gof-core-service
 provider:
   name: aws
   runtime: nodejs12.x
-  stage: dev
   region: us-east-1
- 
+  environment:
+    bucketName: ${self:custom.bucketName}
+    usersTableName: ${self:custom.usersTableName}
+    coursesTableName: ${self:custom.coursesTableName}
+    classesTableName: ${self:custom.classesTableName}
+    connectionsTableName: ${self:custom.connectionsTableName}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+        - s3:*
+      Resource: '*'
+
+plugins:
+  - serverless-webpack
+
+package:
+  individually: true
+
+custom:
+  bucketName: gof-core-service-bucket
+  usersTableName: users-table
+  coursesTableName: courses-table
+  classesTableName: classes-table
+  connectionsTableName: connections-table
+
 functions:
-  hello:
-    handler: handler.hello
+
+resources:
+  Resources:
+    GofCoreServiceBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.bucketName}
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.usersTableName}
+        AttributeDefinitions:
+          - AttributeName: ID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: ID
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+    CoursesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.coursesTableName}
+        AttributeDefinitions:
+          - AttributeName: ID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: ID
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+    ClassesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.classesTableName}
+        AttributeDefinitions:
+          - AttributeName: ID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: ID
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+    ConnectionsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.connectionsTableName}
+        AttributeDefinitions:
+          - AttributeName: ID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: ID
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
