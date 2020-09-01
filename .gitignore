@@ -4,3 +4,9 @@ jspm_packages
 
 # Serverless directories
 .serverless
+
+# yarn
+yarn.lock
+
+# npm
+package-lock.json
