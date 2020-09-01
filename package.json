@@ -19,7 +19,7 @@
     "webpack": "^4.44.1"
   },
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^8.5.1"
   }
 }

@@ -41,7 +41,6 @@ custom:
     migration:
       dir: offline/migrations
 
-
 functions:
   auth:
     handler: src/handlers/auth.handler
