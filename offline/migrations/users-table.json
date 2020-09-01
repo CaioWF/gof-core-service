@@ -1,0 +1,21 @@
+{
+  "Table": {
+    "TableName": "users-table",
+    "KeySchema": [
+      {
+        "AttributeName": "username",
+        "KeyType": "HASH"
+      }
+    ],
+    "AttributeDefinitions": [
+      {
+        "AttributeName": "username",
+        "KeyType": "S"
+      }
+    ],
+    "ProvisionedThoughput": {
+      "ReadCapacityUnits": 1,
+      "WriteCapacityUnits": 1
+    }
+  }
+}

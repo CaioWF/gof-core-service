@@ -1,17 +1,20 @@
 {
   "name": "gof-core-service",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "webpack.config.js",
   "repository": "git@github.com:CaioWF/gof-core-service.git",
   "author": "Caio Weliton <contato.caioweliton@gmail.com>; Publio Blenilio <publio.blenilio@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "dev": "sls offline start --location .",
     "deploy": "sls deploy",
     "remove": "sls remove"
   },
   "devDependencies": {
     "aws-sdk": "^2.743.0",
     "serverless": "^1.80.0",
+    "serverless-dynamodb-local": "^0.2.39",
+    "serverless-offline": "^6.7.0",
     "serverless-webpack": "^5.3.4",
     "webpack": "^4.44.1"
   },

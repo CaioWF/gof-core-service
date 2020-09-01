@@ -19,6 +19,8 @@ provider:
 
 plugins:
   - serverless-webpack
+  - serverless-offline
+  - serverless-dynamodb-local
 
 package:
   individually: true
@@ -29,10 +31,20 @@ custom:
   coursesTableName: courses-table
   classesTableName: classes-table
   connectionsTableName: connections-table
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+    migration:
+      dir: offline/migrations
+
 
 functions:
   auth:
-    handler: handlers/auth.handler
+    handler: src/handlers/auth.handler
     events:
       - http:
           path: auth
