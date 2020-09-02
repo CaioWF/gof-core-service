@@ -1,6 +1,6 @@
 const API_Responses = require('../common/API_Responses');
 const Dynamo = require('../common/Dynamo');
-const Encrypter = require('../utils/Encrypter');
+const Uuid = require('../utils/uuid');
 
 const tableName = 'courses-table';
 
@@ -32,8 +32,9 @@ const show = async ({ pathParameters }) => {
 
 const store = async ({ body }) => {
   const { name, description, teacher } = JSON.parse(body);
+  const id = Uuid.generate();
 
-  const newCourse = await Dynamo.write({ name, description, teacher }, tableName);
+  const newCourse = await Dynamo.write({ ID: id, name, description, teacher }, tableName);
 
   return API_Responses._201(newCourse);
 };
