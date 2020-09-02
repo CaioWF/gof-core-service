@@ -130,10 +130,10 @@ resources:
       Properties:
         TableName: ${self:custom.coursesTableName}
         AttributeDefinitions:
-          - AttributeName: ID
+          - AttributeName: id
             AttributeType: S
         KeySchema:
-          - AttributeName: ID
+          - AttributeName: id
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
     ClassesTable:
