@@ -5,10 +5,16 @@ class JWT {
     this.secret = secret;
   }
 
-  encrypt(value) {
-    const accessToken = jwt.sign({ username: value }, this.secret);
-
+  encrypt(payload) {
+    const accessToken = jwt.sign(payload, this.secret);
+    
     return accessToken;
+  }
+
+  decrypt(token) {
+    const decoded = jwt.verify(token, this.secret);
+    
+    return decoded;
   }
 }
 
