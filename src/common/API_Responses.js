@@ -15,6 +15,14 @@ const Responses = {
     return this._DefineResponse(200, data);
   },
 
+  _201(data = {}) {
+    return this._DefineResponse(201, data);
+  },
+
+  _204() {
+    return this._DefineResponse(204, null);
+  },
+
   _400(data = {}) {
     return this._DefineResponse(400, data);
   },

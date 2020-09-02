@@ -49,6 +49,30 @@ functions:
           path: auth
           method: POST
           cors: true
+  users:
+    handler: src/handlers/users.handler
+    events:
+      - http:
+          path: users
+          method: GET
+          cors: true
+      - http:
+          path: users
+          method: POST
+          cors: true
+      - http:
+          path: users/{username}
+          method: GET
+          cors: true
+      - http:
+          path: users/{username}
+          method: PUT
+          cors: true
+      - http:
+          path: users/{username}
+          method: DELETE
+          cors: true
+      
 
 resources:
   Resources:
