@@ -31,7 +31,7 @@ const show = async ({ pathParameters }) => {
 };
 
 const store = async ({ body }) => {
-  const { name, username, password } = JSON.parse(body);
+  const { name, username, password, type } = JSON.parse(body);
 
   const user = await Dynamo.get({ username }, tableName).catch((err) => {
     console.log('error in Dynamo Get', err);
@@ -51,7 +51,7 @@ const store = async ({ body }) => {
 
 const update = async ({ body, pathParameters }) => {
   const { username  } = pathParameters;
-  const { name, password } = JSON.parse(body);
+  const { name, password, type } = JSON.parse(body);
 
   const user = await Dynamo.get({ username }, tableName).catch((err) => {
     console.log('error in Dynamo Get', err);
