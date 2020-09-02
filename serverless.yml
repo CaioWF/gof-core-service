@@ -72,6 +72,17 @@ functions:
           path: users/{username}
           method: DELETE
           cors: true
+  connections:
+    handler: src/handlers/connections.handler
+    events:
+      - http:
+          path: connections
+          method: GET
+          cors: true
+      - http:
+          path: connections
+          method: POST
+          cors: true
       
 
 resources:
@@ -118,9 +129,9 @@ resources:
       Properties:
         TableName: ${self:custom.connectionsTableName}
         AttributeDefinitions:
-          - AttributeName: ID
+          - AttributeName: id
             AttributeType: S
         KeySchema:
-          - AttributeName: ID
+          - AttributeName: id
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
