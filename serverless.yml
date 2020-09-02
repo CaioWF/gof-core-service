@@ -72,6 +72,29 @@ functions:
           path: users/{username}
           method: DELETE
           cors: true
+  courses:
+    handler: src/handlers/courses.handler
+    events:
+      - http:
+          path: courses
+          method: GET
+          cors: true
+      - http:
+          path: courses
+          method: POST
+          cors: true
+      - http:
+          path: courses/{id}
+          method: GET
+          cors: true
+      - http:
+          path: courses/{id}
+          method: PUT
+          cors: true
+      - http:
+          path: courses/{id}
+          method: DELETE
+          cors: true
   connections:
     handler: src/handlers/connections.handler
     events:
@@ -107,10 +130,10 @@ resources:
       Properties:
         TableName: ${self:custom.coursesTableName}
         AttributeDefinitions:
-          - AttributeName: ID
+          - AttributeName: id
             AttributeType: S
         KeySchema:
-          - AttributeName: ID
+          - AttributeName: id
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
     ClassesTable:
