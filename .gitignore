@@ -16,3 +16,6 @@ package-lock.json
 
 # .dynamodb
 .dynamodb
+
+# serverless-middleware
+.middleware
