@@ -24,7 +24,7 @@ const authenticate = async ({ body }) => {
     return API_Responses._401({ message: 'Unauthorized' });
   }
 
-  const accessToken = JWT.encrypt(username);
+  const accessToken = JWT.encrypt({ username, profile: user.profile });
 
   return API_Responses._200({ accessToken });
 };

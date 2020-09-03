@@ -21,6 +21,7 @@ plugins:
   - serverless-webpack
   - serverless-offline
   - serverless-dynamodb-local
+  - serverless-middleware
 
 package:
   individually: true
@@ -40,6 +41,9 @@ custom:
       migrate: true
     migration:
       dir: offline/migrations
+  middleware:
+    pre:
+      - src/middlewares/authorizer.authorize
 
 functions:
   auth:
