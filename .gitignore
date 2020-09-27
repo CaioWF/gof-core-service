@@ -19,3 +19,6 @@ package-lock.json
 
 # s3
 gof-core-service-bucket
+
+# serverless-middleware
+.middleware

@@ -21,8 +21,13 @@ plugins:
   - serverless-webpack
   - serverless-offline
   - serverless-dynamodb-local
+<<<<<<< HEAD
   - serverless-s3-local
   - serverless-apigw-binary
+=======
+  - serverless-middleware
+
+>>>>>>> 38bd5d3987b12b755df8c1f523353ab1e2268427
 package:
   individually: true
 
@@ -45,11 +50,15 @@ custom:
       inMemory: true
       migrate: true
     migration:
-      dir: offline/
+      dir: offline/migrations
   s3:
     host: localhost
     directory: /home/caio/Área de Trabalho/gof-core-service/
     port: 9000
+  middleware:
+    pre:
+      - src/middlewares/authorizer.authorize
+
 functions:
   auth:
     handler: src/handlers/auth.handler
