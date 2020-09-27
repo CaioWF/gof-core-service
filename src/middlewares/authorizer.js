@@ -16,11 +16,10 @@ const pathPermissions = [
   { path: '/courses/{id}', method: 'GET', validProfiles: ['STUDENT', 'TEACHER'] },
   { path: '/courses/{id}', method: 'PUT', validProfiles: ['TEACHER'] },
   { path: '/courses/{id}', method: 'DELETE', validProfiles: ['TEACHER'] },
-  { path: '/classes', method: 'GET', validProfiles: ['STUDENT', 'TEACHER'] },
-  { path: '/classes', method: 'POST', validProfiles: ['TEACHER'] },
-  { path: '/classes/{id}', method: 'GET', validProfiles: ['STUDENT', 'TEACHER'] },
-  { path: '/classes/{id}', method: 'PUT', validProfiles: ['TEACHER'] },
-  { path: '/classes/{id}', method: 'DELETE', validProfiles: ['TEACHER'] },
+  { path: '/courses/{id}/classes', method: 'POST', validProfiles: ['TEACHER'] },
+  { path: '/courses/{id}/classes/{id}', method: 'GET', validProfiles: ['STUDENT', 'TEACHER'] },
+  { path: '/courses/{id}/classes/{id}', method: 'PUT', validProfiles: ['TEACHER'] },
+  { path: '/courses/{id}/classes/{id}', method: 'DELETE', validProfiles: ['TEACHER'] },
   { path: '/connections', method: '*', validProfiles: ['STUDENT', 'TEACHER'] },
 ];
 

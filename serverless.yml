@@ -21,6 +21,8 @@ plugins:
   - serverless-webpack
   - serverless-offline
   - serverless-dynamodb-local
+  - serverless-s3-local
+  - serverless-apigw-binary
   - serverless-middleware
 
 package:
@@ -32,6 +34,11 @@ custom:
   coursesTableName: courses-table
   classesTableName: classes-table
   connectionsTableName: connections-table
+  serverless-offline:
+    useChildProcesses: true
+  apigwBinary:
+    types:
+      - 'multipart/form-data'
   dynamodb:
     stages:
       - dev
@@ -41,6 +48,10 @@ custom:
       migrate: true
     migration:
       dir: offline/migrations
+  s3:
+    host: localhost
+    directory: /home/caio/Área de Trabalho/gof-core-service/
+    port: 9000
   middleware:
     pre:
       - src/middlewares/authorizer.authorize
@@ -110,7 +121,26 @@ functions:
           path: connections
           method: POST
           cors: true
-      
+  classes:
+    handler: src/handlers/classes.handler
+    events:
+      - http:
+          path: courses/{id}/classes
+          method: POST
+          cors: true
+      - http:
+          path: courses/{id}/classes/{classId}
+          method: GET
+          cors: true
+      - http:
+          path: courses/{id}/classes/{classId}
+          method: PUT
+          cors: true
+      - http:
+          path: courses/{id}/classes/{classId}
+          method: DELETE
+          cors: true
+
 
 resources:
   Resources:
@@ -118,6 +148,7 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:custom.bucketName}
+        AccessControl: PublicRead
     UsersTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -145,10 +176,10 @@ resources:
       Properties:
         TableName: ${self:custom.classesTableName}
         AttributeDefinitions:
-          - AttributeName: ID
+          - AttributeName: id
             AttributeType: S
         KeySchema:
-          - AttributeName: ID
+          - AttributeName: id
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
     ConnectionsTable:
