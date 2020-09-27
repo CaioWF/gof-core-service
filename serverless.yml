@@ -21,13 +21,10 @@ plugins:
   - serverless-webpack
   - serverless-offline
   - serverless-dynamodb-local
-<<<<<<< HEAD
   - serverless-s3-local
   - serverless-apigw-binary
-=======
   - serverless-middleware
 
->>>>>>> 38bd5d3987b12b755df8c1f523353ab1e2268427
 package:
   individually: true
 
