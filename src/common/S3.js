@@ -1,6 +1,17 @@
 const AWS = require('aws-sdk');
 
-const s3Client = new AWS.S3();
+let options = {};
+
+if (process.env.IS_OFFLINE) {
+  options = {
+    s3ForcePathStyle: true,
+    accessKeyId: 'S3RVER',
+    secretAccessKey: 'S3RVER',
+    endpoint: new AWS.Endpoint('http://localhost:9000'),
+  };
+}
+
+const s3Client = new AWS.S3(options);
 
 const S3 = {
   async get(fileName, bucket) {
@@ -24,7 +35,7 @@ const S3 = {
   async write(data, fileName, bucket) {
     const params = {
       Bucket: bucket,
-      Body: JSON.stringify(data),
+      Body: data,
       Key: fileName,
     };
 

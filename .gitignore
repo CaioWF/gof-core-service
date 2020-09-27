@@ -17,5 +17,8 @@ package-lock.json
 # .dynamodb
 .dynamodb
 
+# s3
+gof-core-service-bucket
+
 # serverless-middleware
 .middleware
