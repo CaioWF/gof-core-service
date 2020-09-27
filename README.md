@@ -2,16 +2,16 @@
 
 ## Install
 
-`yarn install` and `sls dynamodb install`
+`npm install` and `sls dynamodb install` and `sls plugin install --name serverless-s3-local`
 
 ## Run Locally
 
-`yarn run dev`
+`npm run dev`
 
 ## Deploy
 
-`yarn run deploy`
+`npm run deploy`
 
 ## Revert Deploy
 
-`yarn run remove`
+`npm run remove`
