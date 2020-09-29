@@ -24,13 +24,13 @@ const pathPermissions = [
 ];
 
 const isAnAllowedPath = (event) => {
-  const matchedPaths = allowedPaths.filter((el) => el.path === event.path && el.method === event.httpMethod);
+  const matchedPaths = allowedPaths.filter((el) => event.resource.includes(el.path) && el.method === event.httpMethod);
 
   return !!matchedPaths.length;
 };
 
 const havePermission = (event, profile) => {
-  const matchedPermissions = pathPermissions.filter((el) => el.path === event.path && (el.method === '*' || el.method === event.httpMethod) && el.validProfiles.includes(profile));
+  const matchedPermissions = pathPermissions.filter((el) => event.resource.includes(el.path) && (el.method === '*' || el.method === event.httpMethod) && el.validProfiles.includes(profile));
 
   return !!matchedPermissions.length;
 };
