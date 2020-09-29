@@ -31,7 +31,7 @@ const show = async ({ pathParameters }) => {
 };
 
 const store = async ({ body }) => {
-  const { name, username, password } = JSON.parse(body);
+  const { name, username, password, profile } = JSON.parse(body);
 
   const user = await Dynamo.get({ username }, tableName).catch((err) => {
     console.log('error in Dynamo Get', err);
@@ -44,14 +44,14 @@ const store = async ({ body }) => {
   }
 
   const encryptedPassword = await Encrypter.hash(password);
-  const newUser = await Dynamo.write({ name, username, password: encryptedPassword }, tableName);
+  const newUser = await Dynamo.write({ name, username, password: encryptedPassword, profile }, tableName);
 
   return API_Responses._201(newUser);
 };
 
 const update = async ({ body, pathParameters }) => {
   const { username  } = pathParameters;
-  const { name, password } = JSON.parse(body);
+  const { name, password, profile } = JSON.parse(body);
 
   const user = await Dynamo.get({ username }, tableName).catch((err) => {
     console.log('error in Dynamo Get', err);
@@ -64,7 +64,7 @@ const update = async ({ body, pathParameters }) => {
   }
 
   const encryptedPassword = await Encrypter.hash(password);
-  const updatedUser = await Dynamo.write({ name, username, password: encryptedPassword }, tableName);
+  const updatedUser = await Dynamo.write({ name, username, password: encryptedPassword, profile }, tableName);
 
   return API_Responses._200(updatedUser);
 };
