@@ -46,7 +46,7 @@ custom:
       dir: offline/migrations
   s3:
     host: localhost
-    directory: /home/caio/Área de Trabalho/gof-core-service/
+    directory: .local_bucket
     port: 9000
   middleware:
     pre:
@@ -134,6 +134,17 @@ functions:
           cors: true
       - http:
           path: courses/{id}/classes/{classId}
+          method: DELETE
+          cors: true
+  subscriptions:
+    handler: src/handlers/subscriptions.handler
+    events:
+      - http:
+          path: subscriptions
+          method: POST
+          cors: true
+      - http:
+          path: subscriptions
           method: DELETE
           cors: true
 
