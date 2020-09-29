@@ -44,7 +44,7 @@ const store = async ({ body }) => {
   }
 
   const encryptedPassword = await Encrypter.hash(password);
-  const newUser = await Dynamo.write({ name, username, password: encryptedPassword, profile }, tableName);
+  const newUser = await Dynamo.write({ name, username, password: encryptedPassword, profile, courses: [] }, tableName);
 
   return API_Responses._201(newUser);
 };
