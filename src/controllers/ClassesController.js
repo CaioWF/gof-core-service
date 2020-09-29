@@ -1,8 +1,7 @@
 const API_Responses = require('../common/API_Responses');
 const Dynamo = require('../common/Dynamo');
 const Uuid = require('../utils/uuid');
-const UploadFile = require('../utils/uploadFile');
-const {parseForm} = require('../utils/formDataParser');
+const SignedUrl = require('../utils/SignedUrl');
 
 const tableName = 'courses-table';
 
@@ -28,11 +27,14 @@ const show = async ({ pathParameters }) => {
     return API_Responses._404({ message: 'Class not found' });
   }
 
-  return API_Responses._200(classFound);
+  const signedUrl = await SignedUrl.generate('getObject', classFound.video);
+
+  return API_Responses._200({ class: classFound, url: signedUrl });
 };
 
 const store = async (event) => {
   const { id } = event.pathParameters;
+  const { title } = JSON.parse(event.body);
 
   const course = await Dynamo.get({ id }, tableName).catch((err) => {
     console.log('error in Dynamo Get', err);
@@ -43,25 +45,23 @@ const store = async (event) => {
     return API_Responses._404({ message: 'Course not found' });
   }
 
-  await parseForm(event);
-  const { body } = event;
-
-  let fileName = null;
-  if (body.file) fileName = await UploadFile.exec(body.file, body.fileName);
+  const fileName = `${Uuid.generate()}.mp4`;
+  const signedUrl = await SignedUrl.generate('putObject', fileName);
   
   const classId = Uuid.generate();
 
-  const newClass = { id: classId, title: body.title, description: body.description, video: fileName };
+  const newClass = { id: classId, title, video: fileName };
 
   course.classes.push(newClass);
 
   await Dynamo.write(course, tableName);
 
-  return API_Responses._201(newClass);
+  return API_Responses._201({class: newClass, url: signedUrl});
 };
 
 const update = async (event) => {
   const { id, classId } = event.pathParameters;
+  const { title } = event.body;
 
   const course = await Dynamo.get({ id }, tableName).catch((err) => {
     console.log('error in Dynamo Get', err);
@@ -78,17 +78,13 @@ const update = async (event) => {
     return API_Responses._404({ message: 'Class not found' });
   }
 
-  await parseForm(event);
-  const { body } = event;
-
-  let fileName = null;
-  if (body.file) fileName = await UploadFile.exec(body.file, body.fileName);
+  const fileName = `${Uuid.generate()}.mp4`;
+  const signedUrl = await SignedUrl.generate('putObject', fileName);
 
   const updatedClass = {
     id: classId,
-    title: body.title,
-    description: body.description,
-    video: fileName !== null ? fileName : classPassed.video,
+    title,
+    video: fileName,
   };
 
   const updatedClasses = course.classes.map((item) => {
@@ -102,7 +98,7 @@ const update = async (event) => {
 
   await Dynamo.write(course, tableName);
 
-  return API_Responses._200(updatedClass);
+  return API_Responses._200({ class: updatedClass, url: signedUrl });
 };
 
 const destroy = async ({ pathParameters }) => {

@@ -22,7 +22,6 @@ plugins:
   - serverless-offline
   - serverless-dynamodb-local
   - serverless-s3-local
-  - serverless-apigw-binary
   - serverless-middleware
 
 package:
@@ -36,9 +35,6 @@ custom:
   connectionsTableName: connections-table
   serverless-offline:
     useChildProcesses: true
-  apigwBinary:
-    types:
-      - 'multipart/form-data'
   dynamodb:
     stages:
       - dev
@@ -149,6 +145,19 @@ resources:
       Properties:
         BucketName: ${self:custom.bucketName}
         AccessControl: PublicRead
+        BucketEncryption:
+          ServerSideEncryptionConfiguration:
+            - ServerSideEncryptionByDefault:
+                SSEAlgorithm: AES256
+        VersioningConfiguration:
+          Status: Enabled
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders: ['*']
+              AllowedMethods: [GET, PUT]
+              AllowedOrigins: ['*']
+              Id: CORSRuleId1
+              MaxAge: '3600'
     UsersTable:
       Type: AWS::DynamoDB::Table
       Properties:

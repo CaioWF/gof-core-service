@@ -1,4 +1,5 @@
 const AWS = require('aws-sdk');
+const SignedUrl = require('../utils/SignedUrl');
 
 let options = {};
 
@@ -10,6 +11,8 @@ if (process.env.IS_OFFLINE) {
     endpoint: new AWS.Endpoint('http://localhost:9000'),
   };
 }
+
+options = {...options, region: 'us-east-1', signatureVersion: 'v4'}
 
 const s3Client = new AWS.S3(options);
 
@@ -47,6 +50,18 @@ const S3 = {
 
     return newData;
   },
+
+  async url(method, filename, bucket) {
+    const params = {
+      Bucket: bucket,
+      Key: filename,
+      Expires: 60 * 5,
+    };
+
+    const signedUrl = await s3Client.getSignedUrl(method, params);
+
+    return signedUrl;
+  }
 };
 
 module.exports = S3;
