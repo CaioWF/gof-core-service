@@ -26,7 +26,7 @@ const authenticate = async ({ body }) => {
 
   const accessToken = JWT.encrypt({ username, profile: user.profile });
 
-  return API_Responses._200({ accessToken });
+  return API_Responses._200({ user, accessToken });
 };
 
 module.exports = { authenticate };
