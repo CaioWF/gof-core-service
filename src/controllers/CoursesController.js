@@ -76,4 +76,19 @@ const destroy = async ({ pathParameters }) => {
   return API_Responses._204();
 };
 
-module.exports = { index, show, store, update, destroy };
+const rank = async ({ pathParameters }) => {
+  const { top } = pathParameters;
+
+  const courses = await Dynamo.scan(tableName).catch((err) => {
+    console.log('error in Dynamo Scan', err);
+    return [];
+  });
+
+  courses.sort((a, b) => b.students.length - a.students.length);
+
+  courses.splice(top);
+
+  return API_Responses._200(courses);
+}
+
+module.exports = { index, show, store, update, destroy, rank };
