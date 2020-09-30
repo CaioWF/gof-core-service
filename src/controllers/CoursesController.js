@@ -5,7 +5,7 @@ const Uuid = require('../utils/uuid');
 const tableName = 'courses-table';
 
 const index = async ({ queryStringParameters }) => {
-  const { teacherId } = queryStringParameters ? queryStringParameters : {};
+  const { teacherUsername } = queryStringParameters ? queryStringParameters : {};
   const courses = await Dynamo.scan(tableName).catch((err) => {
     console.log('error in Dynamo Scan', err);
 
@@ -13,11 +13,8 @@ const index = async ({ queryStringParameters }) => {
   });
 
   return API_Responses._200(
-    teacherId ?
-      courses.filter(
-        el => {
-          el.teacher.id === teacherId
-        }) :
+    teacherUsername ?
+      courses.filter(el => el.teacher.username === teacherUsername) :
       courses
   );
 };
