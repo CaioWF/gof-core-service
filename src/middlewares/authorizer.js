@@ -10,7 +10,7 @@ const allowedPaths = [
 
 const pathPermissions = [
   { path: '/users', method: '*', validProfiles: ['STUDENT', 'TEACHER'] },
-  { path: '/users/{id}', method: '*', validProfiles: ['STUDENT', 'TEACHER'] },
+  { path: '/users/{username}', method: '*', validProfiles: ['STUDENT', 'TEACHER'] },
   { path: '/courses', method: 'GET', validProfiles: ['STUDENT', 'TEACHER'] },
   { path: '/courses', method: 'POST', validProfiles: ['TEACHER'] },
   { path: '/courses/{id}', method: 'GET', validProfiles: ['STUDENT', 'TEACHER'] },
