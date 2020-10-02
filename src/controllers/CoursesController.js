@@ -40,7 +40,6 @@ const show = async ({ pathParameters }) => {
 const store = async ({ body }) => {
   const {
     name,
-    description,
     teacher,
     avatar,
     whatsapp,
@@ -54,7 +53,6 @@ const store = async ({ body }) => {
     {
       id,
       name,
-      description,
       teacher,
       avatar,
       whatsapp,
@@ -74,7 +72,6 @@ const update = async ({ body, pathParameters }) => {
   const { id } = pathParameters;
   const {
     name,
-    description,
     teacher,
     avatar,
     whatsapp,
@@ -98,7 +95,6 @@ const update = async ({ body, pathParameters }) => {
     {
       id,
       name,
-      description,
       teacher,
       avatar,
       whatsapp,
