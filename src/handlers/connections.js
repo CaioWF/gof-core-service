@@ -1,9 +1,9 @@
 const API_Reponses = require('../common/API_Responses');
-const { show, increment } = require('../controllers/ConnectionsController');
+const { numberOfConnections, connectionsPerDayOfWeek, store } = require('../controllers/ConnectionsController');
 
 const methods = {
-  GET: show,
-  POST: increment,
+  GET: (event) => event.path === '/connections/total' ? numberOfConnections(event) : connectionsPerDayOfWeek(event),
+  POST: store,
 };
 
 exports.handler = async (event) => {
