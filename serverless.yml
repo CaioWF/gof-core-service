@@ -114,7 +114,11 @@ functions:
     handler: src/handlers/connections.handler
     events:
       - http:
-          path: connections
+          path: connections/total
+          method: GET
+          cors: true
+      - http:
+          path: connections/per-day-of-week
           method: GET
           cors: true
       - http:

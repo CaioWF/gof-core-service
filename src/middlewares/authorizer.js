@@ -20,7 +20,9 @@ const pathPermissions = [
   { path: '/courses/{id}/classes/{id}', method: 'GET', validProfiles: ['STUDENT', 'TEACHER'] },
   { path: '/courses/{id}/classes/{id}', method: 'PUT', validProfiles: ['TEACHER'] },
   { path: '/courses/{id}/classes/{id}', method: 'DELETE', validProfiles: ['TEACHER'] },
-  { path: '/connections', method: '*', validProfiles: ['STUDENT', 'TEACHER'] },
+  { path: '/connections', method: 'POST', validProfiles: ['STUDENT', 'TEACHER'] },
+  { path: '/connections/total', method: 'GET', validProfiles: ['STUDENT', 'TEACHER'] },
+  { path: '/connections/per-day-of-week', method: 'GET', validProfiles: ['STUDENT', 'TEACHER'] },
   { path: '/subscriptions', method: '*', validProfiles: ['STUDENT'] },
 ];
 
