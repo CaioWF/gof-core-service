@@ -17,7 +17,7 @@
     "serverless-dynamodb-local": "^0.2.39",
     "serverless-middleware": "^0.0.10",
     "serverless-offline": "^6.7.0",
-    "serverless-s3-local": "^0.6.5",
+    "serverless-s3-local": "^0.6.7",
     "serverless-webpack": "^5.3.4",
     "webpack": "^4.44.1"
   },

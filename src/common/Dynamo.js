@@ -38,7 +38,7 @@ const Dynamo = {
 
     const data = await documentClient.get(params).promise();
 
-    if (!data || !data.Item) {
+    if (!data) {
       throw Error(
         `There was an error fetching the data in table ${TableName}`
       );
@@ -78,8 +78,6 @@ const Dynamo = {
         `There was an error fetching the data in table ${TableName}`
       );
     }
-
-    console.log(data);
 
     return data.Item;
   },
