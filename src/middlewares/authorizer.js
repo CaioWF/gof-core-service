@@ -66,9 +66,9 @@ const authorize = async (event, context) => {
       message: 'Invalid token'
     };
 
-    if (tokenIsExpired(iat)) throw {
-      message: 'Token has expired'
-    }
+    // if (tokenIsExpired(iat)) throw {
+    //   message: 'Token has expired'
+    // }
 
     if (!havePermission(event, profile)) throw {
       message: 'Unauthorized'
