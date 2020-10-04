@@ -55,6 +55,7 @@ custom:
 functions:
   auth:
     handler: src/handlers/auth.handler
+    timeout: 30
     events:
       - http:
           path: auth
@@ -62,6 +63,7 @@ functions:
           cors: true
   users:
     handler: src/handlers/users.handler
+    timeout: 30
     events:
       - http:
           path: users
@@ -85,6 +87,7 @@ functions:
           cors: true
   courses:
     handler: src/handlers/courses.handler
+    timeout: 30
     events:
       - http:
           path: courses
@@ -112,6 +115,7 @@ functions:
           cors: true
   connections:
     handler: src/handlers/connections.handler
+    timeout: 30
     events:
       - http:
           path: connections/total
@@ -127,6 +131,7 @@ functions:
           cors: true
   classes:
     handler: src/handlers/classes.handler
+    timeout: 30
     events:
       - http:
           path: courses/{id}/classes
@@ -146,6 +151,7 @@ functions:
           cors: true
   subscriptions:
     handler: src/handlers/subscriptions.handler
+    timeout: 30
     events:
       - http:
           path: subscriptions
